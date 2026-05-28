@@ -1,0 +1,99 @@
+{
+  "name": "MedallionDataPipeline",
+  "properties": {
+    "description": "End-to-end medallion architecture pipeline: Bronze -> Silver -> Gold",
+    "activities": [
+      {
+        "name": "IngestToBronze",
+        "type": "DatabricksNotebook",
+        "dependsOn": [],
+        "policy": {
+          "timeout": "1:00:00",
+          "retry": 2,
+          "retryIntervalInSeconds": 60
+        },
+        "typeProperties": {
+          "notebookPath": "/Repos/medallion/notebooks/01_bronze_ingestion",
+          "baseParameters": {
+            "environment": "@pipeline().parameters.environment"
+          }
+        },
+        "linkedServiceName": {
+          "referenceName": "AzureDatabricksLinkedService",
+          "type": "LinkedServiceReference"
+        }
+      },
+      {
+        "name": "TransformToSilver",
+        "type": "DatabricksNotebook",
+        "dependsOn": [
+          {
+            "activity": "IngestToBronze",
+            "dependencyConditions": ["Succeeded"]
+          }
+        ],
+        "policy": {
+          "timeout": "1:00:00",
+          "retry": 2,
+          "retryIntervalInSeconds": 60
+        },
+        "typeProperties": {
+          "notebookPath": "/Repos/medallion/notebooks/02_silver_transformation"
+        },
+        "linkedServiceName": {
+          "referenceName": "AzureDatabricksLinkedService",
+          "type": "LinkedServiceReference"
+        }
+      },
+      {
+        "name": "AggregateToGold",
+        "type": "DatabricksNotebook",
+        "dependsOn": [
+          {
+            "activity": "TransformToSilver",
+            "dependencyConditions": ["Succeeded"]
+          }
+        ],
+        "policy": {
+          "timeout": "1:00:00",
+          "retry": 2,
+          "retryIntervalInSeconds": 60
+        },
+        "typeProperties": {
+          "notebookPath": "/Repos/medallion/notebooks/03_gold_aggregation"
+        },
+        "linkedServiceName": {
+          "referenceName": "AzureDatabricksLinkedService",
+          "type": "LinkedServiceReference"
+        }
+      },
+      {
+        "name": "LoadToSynapse",
+        "type": "Copy",
+        "dependsOn": [
+          {
+            "activity": "AggregateToGold",
+            "dependencyConditions": ["Succeeded"]
+          }
+        ],
+        "typeProperties": {
+          "source": {
+            "type": "DeltaSource"
+          },
+          "sink": {
+            "type": "SqlDWSink",
+            "allowPolyBase": true,
+            "writeBehavior": "Upsert"
+          }
+        }
+      }
+    ],
+    "parameters": {
+      "environment": {
+        "type": "string",
+        "defaultValue": "dev"
+      }
+    },
+    "annotations": ["medallion", "data-engineering", "delta-lake"]
+  }
+}

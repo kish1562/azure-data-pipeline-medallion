@@ -1,0 +1,66 @@
+<svg viewBox="0 0 900 480" xmlns="http://www.w3.org/2000/svg" font-family="Segoe UI, Arial, sans-serif">
+  <rect width="900" height="480" fill="#f8f9fb"/>
+  <text x="450" y="36" text-anchor="middle" font-size="22" font-weight="700" fill="#0078D4">Azure Medallion Data Pipeline Architecture</text>
+
+  <!-- Sources -->
+  <rect x="30" y="90" width="140" height="70" rx="8" fill="#fff" stroke="#0078D4" stroke-width="2"/>
+  <text x="100" y="120" text-anchor="middle" font-size="13" font-weight="600" fill="#333">Data Sources</text>
+  <text x="100" y="140" text-anchor="middle" font-size="11" fill="#666">SQL Server, REST APIs</text>
+
+  <!-- ADF -->
+  <rect x="220" y="90" width="140" height="70" rx="8" fill="#e6f2fb" stroke="#0078D4" stroke-width="2"/>
+  <text x="290" y="118" text-anchor="middle" font-size="13" font-weight="600" fill="#0078D4">Azure Data</text>
+  <text x="290" y="136" text-anchor="middle" font-size="13" font-weight="600" fill="#0078D4">Factory</text>
+
+  <!-- ADLS -->
+  <rect x="410" y="90" width="140" height="70" rx="8" fill="#fff" stroke="#0078D4" stroke-width="2"/>
+  <text x="480" y="118" text-anchor="middle" font-size="13" font-weight="600" fill="#333">ADLS Gen2</text>
+  <text x="480" y="136" text-anchor="middle" font-size="11" fill="#666">Data Lake Storage</text>
+
+  <!-- Synapse -->
+  <rect x="600" y="90" width="140" height="70" rx="8" fill="#fff" stroke="#0078D4" stroke-width="2"/>
+  <text x="670" y="118" text-anchor="middle" font-size="13" font-weight="600" fill="#333">Synapse</text>
+  <text x="670" y="136" text-anchor="middle" font-size="11" fill="#666">Analytics</text>
+
+  <!-- Power BI -->
+  <rect x="780" y="90" width="90" height="70" rx="8" fill="#fef9e7" stroke="#F2C811" stroke-width="2"/>
+  <text x="825" y="120" text-anchor="middle" font-size="12" font-weight="600" fill="#b8920a">Power BI</text>
+  <text x="825" y="138" text-anchor="middle" font-size="10" fill="#999">Dashboards</text>
+
+  <!-- Arrows top row -->
+  <line x1="170" y1="125" x2="218" y2="125" stroke="#0078D4" stroke-width="2" marker-end="url(#arrow)"/>
+  <line x1="360" y1="125" x2="408" y2="125" stroke="#0078D4" stroke-width="2" marker-end="url(#arrow)"/>
+  <line x1="550" y1="125" x2="598" y2="125" stroke="#0078D4" stroke-width="2" marker-end="url(#arrow)"/>
+  <line x1="740" y1="125" x2="778" y2="125" stroke="#F2C811" stroke-width="2" marker-end="url(#arrowY)"/>
+
+  <!-- Databricks -->
+  <rect x="380" y="230" width="200" height="60" rx="8" fill="#fdeae4" stroke="#FF3621" stroke-width="2"/>
+  <text x="480" y="258" text-anchor="middle" font-size="13" font-weight="600" fill="#FF3621">Azure Databricks</text>
+  <text x="480" y="276" text-anchor="middle" font-size="11" fill="#999">PySpark Transformations</text>
+  <line x1="480" y1="160" x2="480" y2="228" stroke="#FF3621" stroke-width="2" marker-end="url(#arrowR)"/>
+
+  <!-- Medallion layers -->
+  <rect x="180" y="350" width="160" height="80" rx="8" fill="#fbe9d0" stroke="#cd7f32" stroke-width="2"/>
+  <text x="260" y="382" text-anchor="middle" font-size="14" font-weight="700" fill="#cd7f32">BRONZE</text>
+  <text x="260" y="404" text-anchor="middle" font-size="11" fill="#888">Raw ingested data</text>
+
+  <rect x="370" y="350" width="160" height="80" rx="8" fill="#eceff1" stroke="#90a4ae" stroke-width="2"/>
+  <text x="450" y="382" text-anchor="middle" font-size="14" font-weight="700" fill="#607d8b">SILVER</text>
+  <text x="450" y="404" text-anchor="middle" font-size="11" fill="#888">Cleaned &amp; validated</text>
+
+  <rect x="560" y="350" width="160" height="80" rx="8" fill="#fff7d6" stroke="#d4af37" stroke-width="2"/>
+  <text x="640" y="382" text-anchor="middle" font-size="14" font-weight="700" fill="#b8920a">GOLD</text>
+  <text x="640" y="404" text-anchor="middle" font-size="11" fill="#888">Business aggregates</text>
+
+  <line x1="340" y1="390" x2="368" y2="390" stroke="#90a4ae" stroke-width="2" marker-end="url(#arrowG)"/>
+  <line x1="530" y1="390" x2="558" y2="390" stroke="#d4af37" stroke-width="2" marker-end="url(#arrowGo)"/>
+  <line x1="430" y1="290" x2="300" y2="348" stroke="#FF3621" stroke-width="1.5" stroke-dasharray="4" marker-end="url(#arrowR)"/>
+
+  <defs>
+    <marker id="arrow" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#0078D4"/></marker>
+    <marker id="arrowY" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#F2C811"/></marker>
+    <marker id="arrowR" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#FF3621"/></marker>
+    <marker id="arrowG" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#90a4ae"/></marker>
+    <marker id="arrowGo" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#d4af37"/></marker>
+  </defs>
+</svg>
