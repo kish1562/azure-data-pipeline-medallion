@@ -95,7 +95,7 @@ Update `config/settings.py` with your Azure credentials and resource names.
 |---|---|---|
 | Data ingestion latency | 45 min | 27 min (**40% reduction**) |
 | Query performance | 12 sec avg | 8.4 sec avg (**30% improvement**) |
-| Pipeline deployment time | Manual (2 hrs) | Automated CI/CD (**35% faster**) |
+| Pipeline deployment time | Manual  (2 hrs) | Automated CI/CD (**35% faster**) |
 | Data quality score | 78% | 96% (medallion validation) |
 
 ---
